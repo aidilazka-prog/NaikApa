@@ -20,7 +20,8 @@ export async function GET() {
     await migrate(db, { migrationsFolder: './drizzle' });
 
     return NextResponse.json({ message: "Migration successfully pushed to Turso!" }, { status: 200 });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message, stack: error.stack }, { status: 500 });
+  } catch (error) {
+    const errMsg = error instanceof Error ? error.message : "Unknown error";
+    return NextResponse.json({ error: errMsg }, { status: 500 });
   }
 }
