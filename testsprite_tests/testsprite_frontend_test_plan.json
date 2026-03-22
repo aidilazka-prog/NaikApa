@@ -1,0 +1,732 @@
+[
+  {
+    "id": "TC001",
+    "title": "Submit route search with valid pickup and destination navigates to results with query params",
+    "description": "Verifies that completing both fields and submitting the search navigates to the route comparison results page with origin and destination reflected in the URL.",
+    "category": "Multimodal route search",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Lokasi Penjemputan\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Blok M\" into \"Lokasi Penjemputan\" field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Stasiun Sudirman\" into \"Lokasi Tujuan\" field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Cari Rute Terbaik\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/routes\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"origin=\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"destination=\""
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Validation: missing pickup shows inline error and stays on home page",
+    "description": "Verifies the form prevents submission when pickup is empty and shows an inline validation message for Lokasi Penjemputan.",
+    "category": "Multimodal route search",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Stasiun Sudirman\" into \"Lokasi Tujuan\" field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Cari Rute Terbaik\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Lokasi Penjemputan\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"wajib\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Validation: missing destination blocks submit and shows inline error",
+    "description": "Verifies the form prevents submission when destination is empty and shows an inline validation message for Lokasi Tujuan.",
+    "category": "Multimodal route search",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Blok M\" into \"Lokasi Penjemputan\" field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Cari Rute Terbaik\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Lokasi Tujuan\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"wajib\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Validation: both fields empty shows inline errors and does not navigate",
+    "description": "Verifies submitting the form with both fields empty shows validation feedback and stays on the landing page.",
+    "category": "Multimodal route search",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Cari Rute Terbaik\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Lokasi Penjemputan\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Lokasi Tujuan\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"wajib\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Search accepts punctuation and common separators in locations and still navigates to results",
+    "description": "Verifies that locations with punctuation (e.g., commas) are accepted and navigation to results still occurs.",
+    "category": "Multimodal route search",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Jakarta, Selatan\" into \"Lokasi Penjemputan\" field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Tanah Abang, Jakarta Pusat\" into \"Lokasi Tujuan\" field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Cari Rute Terbaik\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/routes\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"origin=\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"destination=\""
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Search trims leading/trailing spaces and still navigates to results",
+    "description": "Verifies that entering locations with extra spaces still allows submission and navigates to results.",
+    "category": "Multimodal route search",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Type \"  Blok M  \" into \"Lokasi Penjemputan\" field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"  Stasiun Sudirman  \" into \"Lokasi Tujuan\" field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Cari Rute Terbaik\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/routes\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"origin=\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"destination=\""
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Route results page shows loading state then renders route cards for a valid search",
+    "description": "Verifies that the results page displays a loading indicator and then shows route option cards with key estimates for a typical origin/destination query.",
+    "category": "Route results list",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to \"/routes?origin=Blok%20M&destination=Bundaran%20HI\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Memuat\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Blok M\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Bundaran HI\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"a route option card\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"a route card badge\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"a route card estimate for time\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"a route card estimate for cost\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Open route detail from a route card via 'Lihat Detail & Perjalanan'",
+    "description": "Verifies that selecting a route option from the list navigates to the route detail page for the selected id.",
+    "category": "Route results list",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to \"/routes?origin=Blok%20M&destination=Bundaran%20HI\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"a route option card\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Lihat Detail & Perjalanan\" on the first visible route card"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/routes/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Perjalanan\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"a step-by-step journey section\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Return to home from results using 'Ubah Pencarian'",
+    "description": "Verifies that the user can leave the results page and return to the landing page using the refine search action.",
+    "category": "Route results list",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to \"/routes?origin=Blok%20M&destination=Bundaran%20HI\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Ubah Pencarian\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Ubah Pencarian\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"multimodal route search form\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Results page handles missing query parameters gracefully",
+    "description": "Verifies the results page shows a visible empty/error state when opened without required origin/destination query values.",
+    "category": "Route results list",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to \"/routes\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Memuat\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Tidak ada rute\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Ubah Pencarian\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Ubah Pencarian\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Empty results state shows 'no routes found' messaging and allows returning home",
+    "description": "Verifies that when the results page shows no available routes, the user sees an appropriate message and can navigate back via 'Ubah Pencarian'.",
+    "category": "Route results list",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to \"/routes?origin=AAAAA_TIDAK_VALID&destination=BBBBB_TIDAK_VALID\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Memuat\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Tidak ada rute\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Ubah Pencarian\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Ubah Pencarian\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"multimodal route search form\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Error state on results page shows failure messaging and allows returning home",
+    "description": "Verifies that if results fail to load, the page shows a visible failure message and still provides a way to return home.",
+    "category": "Route results list",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to \"/routes?origin=%25%25%25&destination=%25%25%25\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Memuat\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Gagal\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Ubah Pencarian\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Ubah Pencarian\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Route cards show the expected primary action affordance",
+    "description": "Verifies that each visible route card includes the primary action to view details, ensuring list items are actionable.",
+    "category": "Route results list",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to \"/routes?origin=Blok%20M&destination=Bundaran%20HI\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"a route option card\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Lihat Detail & Perjalanan\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"the bottom of the route results list\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Lihat Detail & Perjalanan\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Route detail r1 shows step-by-step timeline and cost breakdown",
+    "description": "Verifies the r1 route detail page renders journey steps and a visible cost breakdown with the ride-hailing CTA present.",
+    "category": "Route journey detail",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /routes/r1"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/routes/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Kembali ke Hasil Pencarian\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Pesan Ride-Hailing Sekarang\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Biaya\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"journey steps timeline\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Back to results from r1 returns to route comparison results page",
+    "description": "Verifies the back link on the route detail page returns the user to the route comparison results page.",
+    "category": "Route journey detail",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /routes/r1"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Kembali ke Hasil Pencarian\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Kembali ke Hasil Pencarian\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/routes\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"?\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page title contains \"Routes\""
+      }
+    ]
+  },
+  {
+    "id": "TC016",
+    "title": "Clicking ride-hailing CTA on r1 shows simulated booking confirmation",
+    "description": "Verifies the ride-hailing CTA on r1 triggers a visible simulated booking UI/confirmation (mocked).",
+    "category": "Route journey detail",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /routes/r1"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Pesan Ride-Hailing Sekarang\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Pesan Ride-Hailing Sekarang\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"booking confirmation\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Pesan\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Ride-Hailing\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC017",
+    "title": "Non-r1 route id shows generic title copy with sample steps visible",
+    "description": "Verifies a non-r1 id still renders a readable page with generic title copy and sample journey steps.",
+    "category": "Route journey detail",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /routes/non-r1"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/routes/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"route title header\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"journey steps timeline\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Biaya\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Pesan Ride-Hailing Sekarang\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC018",
+    "title": "Non-r1 booking CTA indicates integration not available (mocked/limited)",
+    "description": "Verifies that attempting to book from a non-r1 id shows a visible message/indicator that booking integration is not available for that sample id.",
+    "category": "Route journey detail",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /routes/non-r1"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Pesan Ride-Hailing Sekarang\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Pesan Ride-Hailing Sekarang\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"tidak tersedia\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"booking\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"availability indicator\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC019",
+    "title": "Route detail page remains usable when booking confirmation is dismissed",
+    "description": "Verifies that after opening the simulated booking UI, the user can dismiss it and still see the route steps and CTA.",
+    "category": "Route journey detail",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /routes/r1"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Pesan Ride-Hailing Sekarang\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"booking confirmation\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click \"Tutup\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"journey steps timeline\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Pesan Ride-Hailing Sekarang\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC020",
+    "title": "Email/password Masuk shows not-wired/error behavior without completing end-to-end login",
+    "description": "Verifies that attempting email/password sign-in does not complete login and instead shows an error/notice or remains on the login page.",
+    "category": "Login",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"user@example.com\" into the \"Email\" field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"wrongpassword\" into the \"Password\" field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Masuk\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Masuk\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC021",
+    "title": "Email/password Masuk with empty fields does not proceed away from /login",
+    "description": "Verifies clicking Masuk with empty inputs does not navigate away from the login page.",
+    "category": "Login",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Masuk\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Masuk\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Lanjutkan dengan Google\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC022",
+    "title": "Password-only entry and Masuk does not complete login",
+    "description": "Verifies partial credential entry still does not complete end-to-end login and the user remains on the login page.",
+    "category": "Login",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"somepassword\" into the \"Password\" field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Masuk\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      }
+    ]
+  }
+]

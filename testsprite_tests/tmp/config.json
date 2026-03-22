@@ -1,0 +1,18 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3000",
+  "executionArgs": {
+    "projectName": "NaikApa",
+    "projectPath": "c:\\Users\\aidil\\OneDrive\\Documents\\Coding\\NaikApa",
+    "testIds": [],
+    "additionalInstruction": "",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-px8C10AQJptN2R0K-sF9bmiOJepP8vba27T0j5qw2Z6iG7ZXUE4eUO-3sEVtYo8m5OMqGpbCuQ0gaVZMVbiQq9Qd9Cs3SmoZNwCp68fRSjpKjtsz6lXZPHV4jNhOpDPuMdM"
+    }
+  },
+  "serverPort": 56550,
+  "proxy": "http://90058391-412f-4c66-9b47-17eec6b335f1:tjGt9Zmw9IwfY1aewIXHQNwlVtoB2NJ0@tun.testsprite.com:8080"
+}

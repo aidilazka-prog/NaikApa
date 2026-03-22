@@ -1,0 +1,86 @@
+version: "2"
+type: frontend
+tech_stack:
+  - TypeScript
+  - Next.js 14 (App Router)
+  - React 18
+  - Tailwind CSS
+  - shadcn/ui (Base UI)
+  - better-auth (Google OAuth)
+  - Drizzle ORM + SQLite (libsql)
+routes:
+  - path: /
+    file: src/app/page.tsx
+    auth_required: false
+    description: Landing page with hero and multimodal route search form
+  - path: /login
+    file: src/app/login/page.tsx
+    auth_required: false
+    description: Sign-in with Google or email/password fields (UI)
+  - path: /routes
+    file: src/app/routes/page.tsx
+    auth_required: false
+    description: Route comparison results; reads origin and destination from query string
+  - path: /routes/[id]
+    file: src/app/routes/[id]/page.tsx
+    auth_required: false
+    description: Step-by-step journey detail for a selected route option
+features:
+  - name: Multimodal route search
+    description: User enters pickup and destination on the home page and navigates to results.
+    files:
+      - src/app/page.tsx
+      - src/components/SearchForm.tsx
+    entry_route: /
+    user_interactions:
+      - Enter pickup location in Lokasi Penjemputan
+      - Enter destination in Lokasi Tujuan
+      - Submit the form with Cari Rute Terbaik
+    api_calls: []
+    auth_required: false
+  - name: Route results list
+    description: Fetches and displays multimodal options with time, cost, and links to detail.
+    files:
+      - src/app/routes/page.tsx
+    entry_route: /routes
+    user_interactions:
+      - View loading state while routes load
+      - See listed route cards with badges and estimates
+      - Click Ubah Pencarian to return home
+      - Click Lihat Detail & Perjalanan on a route card
+    api_calls:
+      - method: GET
+        endpoint: /api/routes?origin={origin}&destination={destination}
+    auth_required: false
+  - name: Route journey detail
+    description: Static demo of step-by-step guidance and ride-hailing CTA for a chosen route id.
+    files:
+      - src/app/routes/[id]/page.tsx
+    entry_route: /routes/r1
+    user_interactions:
+      - Click Kembali ke Hasil Pencarian
+      - Read journey steps and cost breakdown
+      - See Pesan Ride-Hailing Sekarang button (UI)
+    api_calls: []
+    auth_required: false
+  - name: Login
+    description: Google OAuth via better-auth; email and password fields and primary Masuk button are present in the UI.
+    files:
+      - src/app/login/page.tsx
+      - src/lib/auth-client.ts
+    entry_route: /login
+    user_interactions:
+      - Click Lanjutkan dengan Google to start OAuth
+      - Optionally fill email and password fields
+      - Click Masuk
+    api_calls:
+      - method: POST
+        endpoint: /api/auth/* (better-auth handler)
+    auth_required: false
+known_limitations:
+  - issue: Email/password Masuk and Daftar disini are not fully wired; only Google sign-in uses authClient
+    location: src/app/login/page.tsx
+    impact: Password login and registration flows may not complete end-to-end in automated tests
+  - issue: Route detail page uses mock content keyed mainly by id r1 for intermodal copy
+    location: src/app/routes/[id]/page.tsx
+    impact: Non-r1 ids show generic title copy while still showing sample steps
