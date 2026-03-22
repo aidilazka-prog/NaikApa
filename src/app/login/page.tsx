@@ -15,7 +15,7 @@ export default function LoginPage() {
   const handleGoogleLogin = async () => {
     try {
       setIsPending(true);
-      const { data, error } = await authClient.signIn.social({
+      const { error } = await authClient.signIn.social({
         provider: "google",
         callbackURL: "/", // Redirect after success
       });
@@ -23,7 +23,7 @@ export default function LoginPage() {
       if (error) {
         alert("Gagal memproses login: " + (error.message || "Pastikan pengaturan Google Auth benar."));
       }
-    } catch (err) {
+    } catch {
       alert("Terjadi kesalahan jaringan.");
     } finally {
       setIsPending(false);
